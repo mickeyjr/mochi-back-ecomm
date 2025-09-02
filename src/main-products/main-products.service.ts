@@ -15,7 +15,7 @@ export class MainProductsService {
   async findAll(store: any) {
     try {
       const productos = await this.ProductByStoreModel
-        .find({ IdStore: store.store },
+        .find({ IdStore: store.store, InStock: true },
           { Descripcion: 1, Nombre: 1, CodigoBarras: 1, IdStore: 1, IdProduct: 1 }
         )
         .populate({ path: 'imagenes', select: 'ImagenBuffer ImagenMimeType' })
