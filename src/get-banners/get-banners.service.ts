@@ -9,16 +9,17 @@ import { Model } from 'mongoose';
 export class GetBannersService {
 
   constructor(
-  @InjectModel(BannersService.name) private BannersServiceSchema: Model<BannersService>
+    @InjectModel(BannersService.name) private BannersServiceSchema: Model<BannersService>
   ) { }
 
   create(createGetBannerDto: CreateGetBannerDto) {
     return 'This action adds a new getBanner';
   }
 
-  findAll() {
-    const allBanners = this.BannersServiceSchema.find();
-    return allBanners;
+  async findAll() {
+    const allBanners = await this.BannersServiceSchema.find().exec();
+    const sorted = allBanners.sort((a, b) => a.position - b.position);
+    return sorted;
   }
 
   findOne(id: number) {
