@@ -1,10 +1,18 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import axios from 'axios';
+import * as cors from 'cors';
 
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  app.use(cors({
+    origin: 'https://mochi-ecommerce.vercel.app',
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    credentials: true,
+  }));
+
   app.enableCors();
   await app.listen(process.env.PORT ?? 3003);
 }
