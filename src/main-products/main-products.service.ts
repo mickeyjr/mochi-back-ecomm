@@ -60,7 +60,7 @@ export class MainProductsService {
           { IdStore: store.store, InStock: true },
           { Descripcion: 1, Nombre: 1, CodigoBarras: 1, IdStore: 1, IdProduct: 1 },
         )
-        .populate({ path: 'imagenes', select: 'ImagenBuffer ImagenMimeType' })
+        .populate({ path: 'imagenes', select: 'UrlImage' })
         .populate({ path: 'IdProduct', model: 'Productos', select: 'Serie Brand' })
         .lean<ProductByStoreDoc[]>()
         .exec();
